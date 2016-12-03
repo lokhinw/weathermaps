@@ -1,7 +1,7 @@
 let express = require("express");
 let body_parser = require("body-parser");
 let maps_api = require("./scripts/maps.js")();
-
+let forecast = require("./index.js")();
 let app = express();
 let listener = app.listen(8080, 'localhost', function () {
     console.log("Server is listening on port 8080")
