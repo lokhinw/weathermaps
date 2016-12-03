@@ -1,11 +1,14 @@
 .logo {
   width: 200px;
   float: right;
+<<<<<<< Updated upstream
   margin-left: 40px;
   margin-top: auto;
 <<<<<<< Updated upstream
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
   height: auto;
@@ -17,7 +20,15 @@
   margin-top: 40px;
 }
 
-.search {
-  width: 20px;
-  height: 20px;
+.sharp {
+
+  border-radius:0 !IMPORTANT;
+}
+
+.btn {
+  color: #0088cc;
+}
+
+.form-control {
+  background-color: #428bca;
 }
