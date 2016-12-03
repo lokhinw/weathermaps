@@ -17,7 +17,7 @@ module.exports = function () {
                     throw err;
                 }
                 else {
-                    callback(res.json);
+                    callback(null, res.json);
                 }
             });
         },
@@ -29,7 +29,7 @@ module.exports = function () {
                     throw err;
                 }
                 else {
-                    callback(res.json);
+                    callback(null, res.json);
                 }
             });
         }
