@@ -1,7 +1,4 @@
 let Forecast = require('forecast');
-let moment = require('moment');
-// let latitude = 55.748517; //43.6425585;toronto
-// let longitude = 37.0720873; //-79.387092;toronto
 
 module.exports = function() {
     let forecast = new Forecast({
@@ -22,26 +19,16 @@ module.exports = function() {
                 callback(console.dir(err));
                 return;
             }
-            //  console.dir(weather);
-            // for (let i = 0; i < weather.hourly.data.length; i++) {
-            //     console.log(weather.hourly.data[i].time);
-            // }
-            //
-            // let currentTime = (weather.daily.data[0].time);
-            // let currentTimeHR = console.log(moment.unix(currentTime).format("hh"));
-            // let currentWeather = (weather.daily[0].temperature);
-            //  let futureWeather = ();
-            // console.log(currentTimeHR);
-            // return currentTimeHR;
-            // return currentWeather;
-            //
+
             if (hrsFromNow < 49) {
-                callback( {
+                callback({
                     temperature: weather.hourly.data[hrsFromNow].temperature,
-                    precipType: weather.hourly.data[hrsFromNow].precipType
+                    precipType: weather.hourly.data[hrsFromNow].precipType,
+                    humidity: weather.hourly.data[hrsFromNow].humidity,
+                    windSpeed: weather.hourly.ldata[hrsFromNow].windSpeed
                 });
             } else {
-                callback( {});
+                callback({});
             }
         });
     };
