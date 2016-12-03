@@ -72,10 +72,19 @@ function display(err, origin, destination, dist, weather_origin, weather_dest) {
     }
     else {
         display_route(origin, destination);
+        var kdscln = $("#weatherinformation");
+        kdscln.text(JSON.stringify({
+            origin: origin,
+            destination: destination,
+            dist: dist,
+            weather_origin: weather_origin,
+            weather_dest: weather_dest
+        }));
+        kdscln.fadeIn(1000);
     }
 }
 
-function query(origin, destination, depart_time) {
+function query(origin, destination) {
     async.parallel([
         function (callback) {
             geocode(origin, callback);
@@ -84,7 +93,7 @@ function query(origin, destination, depart_time) {
             geocode(destination, callback);
         },
         function (callback) {
-            dist_mat(origin, destination, depart_time, callback);
+            dist_mat(origin, destination, new Date().getTime(), callback);
         }
     ], function (err, res) {
         var geo_origin = res[0];
@@ -121,5 +130,12 @@ function query(origin, destination, depart_time) {
     });
 }
 $(function () {
-    query("BEIJING", "TORONTO, ON", new Date().getTime());
+    $("#weatherinformation").fadeOut(1);
+    $("#form").submit(function (event) {
+        var depn = $("#txt_depart").val();
+        var desn = $("#txt_arrive").val();
+        console.log(depn + " " + desn);
+        query(depn, desn);
+        event.preventDefault();
+    })
 });
