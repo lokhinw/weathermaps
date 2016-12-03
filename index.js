@@ -4,7 +4,7 @@ let moment = require('moment');
 // let longitude = 37.0720873; //-79.387092;toronto
 
 module.exports = function() {
-    var forecast = new Forecast({
+    let forecast = new Forecast({
         service: 'darksky',
         key: '6dc9ae2624533f631c08674cd447483b',
         units: 'celcius',
@@ -15,14 +15,17 @@ module.exports = function() {
         }
     });
 
-    return function(latitude, longitude, hrsFromNow) {
+    return function(latitude, longitude, hrsFromNow, callback) {
         // Retrieve weather information from coordinates (Sydney, Australia)
         forecast.get([latitude, longitude], function(err, weather) {
-            if (err) return console.dir(err);
+            if (err) {
+                callback(console.dir(err));
+                return;
+            }
             //  console.dir(weather);
-            // for (let i = 0; i < weather.hourly.data.length; i++) {
-            //     console.log(weather.hourly.data[i].time);
-            // }
+            for (let i = 0; i < weather.hourly.data.length; i++) {
+                console.log(weather.hourly.data[i].time);
+            }
             //
             // let currentTime = (weather.daily.data[0].time);
             // let currentTimeHR = console.log(moment.unix(currentTime).format("hh"));
@@ -33,12 +36,12 @@ module.exports = function() {
             // return currentWeather;
             //
             if (hrsFromNow < 49) {
-                return {
+                callback( {
                     temperature: weather.hourly.data[hrsFromNow].temperature,
                     precipType: weather.hourly.data[hrsFromNow].precipType
-                };
+                });
             } else {
-                return {};
+                callback( {});
             }
         });
     };

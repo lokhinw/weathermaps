@@ -14,8 +14,15 @@ module.exports = function(){
                 mode: 'driving',
                 traffic_model: 'best_guess'
             }, function(err, res){
-                callback(res.json.results);
+                if(err){
+                    console.log("crap");
+                }
+                else {
+                    callback(res.json);
+                }
             });
+        },
+        geocode: function(address){
 
         }
     };

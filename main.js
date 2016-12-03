@@ -21,5 +21,7 @@ app
     })
     .use(express.static('static'));
 if (hrsFromNow < 49) {
-    console.log(forecast(latitude, longitude, hrsFromNow).temperature);
+    forecast(latitude, longitude, hrsFromNow, function(a){
+        console.log(a.temperature);
+    });
 }
