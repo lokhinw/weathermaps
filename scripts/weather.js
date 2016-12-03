@@ -36,13 +36,13 @@ module.exports = function() {
             // return currentWeather;
             //
             if (hrsFromNow < 49) {
-                callback( {
+                callback( null,{
                     temperature: weather.hourly.data[hrsFromNow].temperature,
                     precipType: weather.hourly.data[hrsFromNow].precipType,
                     precipProbability: weather.hourly.data[hrsFromNow].precipProbability
                 });
             } else {
-                callback( {});
+                callback( null, {});
             }
         });
     };

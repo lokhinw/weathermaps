@@ -66,11 +66,25 @@ function weather(coord, hours, callback) {
     });
 }
 
-function display(origin, destination, dist, weather_origin, weather_dest) {
-    display_route(origin, destination);
+function display(err, origin, destination, dist, weather_origin, weather_dest) {
+    if (err) {
+        alert(err);
+    }
+    else {
+        display_route(origin, destination);
+        var kdscln = $("#weatherinformation");
+        kdscln.text(JSON.stringify({
+            origin: origin,
+            destination: destination,
+            dist: dist,
+            weather_origin: weather_origin,
+            weather_dest: weather_dest
+        }));
+        kdscln.fadeIn(1000);
+    }
 }
 
-function query(origin, destination, depart_time) {
+function query(origin, destination) {
     async.parallel([
         function (callback) {
             geocode(origin, callback);
@@ -79,28 +93,49 @@ function query(origin, destination, depart_time) {
             geocode(destination, callback);
         },
         function (callback) {
-            dist_mat(origin, destination, depart_time, callback);
+            dist_mat(origin, destination, new Date().getTime(), callback);
         }
     ], function (err, res) {
         var geo_origin = res[0];
         var geo_dest = res[1];
         var dist = res[2];
 
-        async.parallel([
-            function (callback) {
-                weather(geo_origin.geometry.location, 0, callback);
-            },
-            function (callback) {
-                weather(geo_dest.geometry.location,
-                    Math.round(dist.duration.value / (60 * 60)), callback);
-            }
-        ], function (err_w, res_w) {
-            var weather_origin = res_w[0];
-            var weather_dest = res_w[1];
-            display(geo_origin, geo_dest, dist, weather_origin, weather_dest);
-        });
+        if (!geo_origin) {
+            err = "Origin does not exist";
+            display(err);
+        }
+        else if (!geo_dest) {
+            err = "Destination does not exist";
+            display(err);
+        }
+        else if (dist.status == "ZERO_RESULTS" || dist.status == "NOT_FOUND") {
+            err = "Path could not be found";
+            display(err);
+        }
+        else {
+            async.parallel([
+                function (callback) {
+                    weather(geo_origin.geometry.location, 0, callback);
+                },
+                function (callback) {
+                    weather(geo_dest.geometry.location,
+                        Math.round(dist.duration.value / (60 * 60)), callback);
+                }
+            ], function (err_w, res_w) {
+                var weather_origin = res_w[0];
+                var weather_dest = res_w[1];
+                display(null, geo_origin, geo_dest, dist, weather_origin, weather_dest);
+            });
+        }
     });
 }
 $(function () {
-    query("CHICAGO, IL", "TORONTO, ON", new Date().getTime());
+    $("#weatherinformation").fadeOut(1);
+    $("#form").submit(function (event) {
+        var depn = $("#txt_depart").val();
+        var desn = $("#txt_arrive").val();
+        console.log(depn + " " + desn);
+        query(depn, desn);
+        event.preventDefault();
+    })
 });

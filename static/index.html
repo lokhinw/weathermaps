@@ -1,15 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>TEST</title>
+    <meta charset="utf-8">
+    <title>Weather Maps</title>
+
+
+    <link rel="shortcut icon" href="imageedit_4_9145829465.png"/>
+    <link rel="stylesheet" type="text/css" href="Style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <img src="WeatherMaps.png" alt="Weather Maps logo" class="logo"/>
+    <link href="https://fonts.googleapis.com/css?family=Maven+Pro:400,700" rel="stylesheet">
 </head>
+
 <body>
+
+<div id="weatherinformation" style="white-space: pre">
+    <h1 class="Header padding1">Departure</h1>
+    <h1 class="Header padding2">Arrival</h1>
+</div>
+
+
+
+<div id="sb-search" class="sb-search">
+    <form id="form" class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+            <input id="txt_depart" type="text" class="form-control sharp" placeholder="Departure">
+            <input id="txt_arrive" type="text" class="form-control sharp" placeholder="Arrival">
+        </div>
+        <button type="submit" class="btn btn-primary sharp"><span class="glyphicon glyphicon-search"></span></button>
+    </form>
+</div>
 <div id="map"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script async defer
         src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC6ohDrEXU3sSvjtjYtrtPwcZ2I13CuMpI&callback=init">
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/async/2.1.4/async.min.js"></script>
 <script src="weathermaps.js"></script>
 </body>
+
 </html>
