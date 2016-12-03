@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var Forecast = require('forecast');
 var moment = require('moment');
 var latitude = 43.6425585;
