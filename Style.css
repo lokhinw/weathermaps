@@ -2,6 +2,7 @@
   width: 200px;
   float: right;
   margin-left: 40px;
+  margin-top: auto;
 <<<<<<< Updated upstream
 =======
 <<<<<<< HEAD
@@ -11,6 +12,7 @@
 
 >>>>>>> origin/master
 }
+
 .sb-search {
   margin-top: 40px;
 }
