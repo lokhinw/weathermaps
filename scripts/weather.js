@@ -37,9 +37,9 @@ module.exports = function() {
             //
             if (hrsFromNow < 49) {
                 callback( null,{
-                    temperature: weather.hourly.data[hrsFromNow].temperature,
-                    precipType: weather.hourly.data[hrsFromNow].precipType,
-                    precipProbability: weather.hourly.data[hrsFromNow].precipProbability
+                  temperature: weather.hourly.data[hrsFromNow].temperature,
+                  precipType: weather.hourly.data[hrsFromNow].precipType,
+                  precipProbability: weather.hourly.data[hrsFromNow].precipProbability
                 });
             } else {
                 callback( null, {});
