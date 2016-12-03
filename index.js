@@ -1,6 +1,6 @@
 var Forecast = require('forecast');
 var moment = require('moment');
-// Initialize
+
 // var forecast = new Forecast({
 //     service: 'darksky',
 //     key: '6dc9ae2624533f631c08674cd447483b',
@@ -18,4 +18,4 @@ var moment = require('moment');
 //     console.log(JSON.stringify(weather, null, 2));
 // });
 
-console.log(moment().valueOf(1480779247));
+console.log(moment.unix(1480779935).format("hh"));
