@@ -13,15 +13,21 @@ app
     .use(body_parser.json())
     .post("/api/maps/distance_mat", function(req, res, next) {
         let c = req.body;
-        maps_api.distance_matrix([-79, -79], [-80, -80], new Date().getTime(), function(res) {
-            console.log(JSON.stringify(res));
-            res.end(res);
+        maps_api.distance_matrix(c.origin, c.destination, c.depart_time, function(a) {
+            console.log(JSON.stringify(a));
+            res.end(a);
         });
-
+    })
+    .post("/api/weather/", function(req, res, next){
+        let c = req.body;
+        if (c.hours < 49) {
+            forecast(c.latitude, c.longitude, c.hours, function(a){
+                res.end(JSON.stringify(a));
+            });
+        }
+        else{
+            res.end("{}");
+        }
     })
     .use(express.static('static'));
-if (hrsFromNow < 49) {
-    forecast(latitude, longitude, hrsFromNow, function(a){
-        console.log(a.temperature);
-    });
-}
+
