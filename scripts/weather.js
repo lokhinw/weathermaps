@@ -39,10 +39,18 @@ module.exports = function() {
                 callback( null,{
                   temperature: weather.hourly.data[hrsFromNow].temperature,
                   precipType: weather.hourly.data[hrsFromNow].precipType,
-                  precipProbability: weather.hourly.data[hrsFromNow].precipProbability
+                  precipProbability: weather.hourly.data[hrsFromNow].precipProbability,
+                  humidity: weather.hourly.data[hrsFromNow].humidity
                 });
-            } else {
-                callback( null, {});
+            } else if (hrsFromNow < 24*7) {
+              callback( null,{
+                temperature: weather.daily.data[Math.floor(hrsFromNow/24)].temperature,
+                precipType: weather.daily.data[Math.floor(hrsFromNow/24)].precipType,
+                precipProbability: weather.daily.data[Math.floor(hrsFromNow/24)].precipProbability,
+                humidity: weather.daily.data[Math.floor(hrsFromNow/24)].humidity
+              });
+            } else{
+              callback( null, {});
             }
         });
     };
