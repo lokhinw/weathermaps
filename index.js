@@ -23,9 +23,9 @@ module.exports = function() {
                 return;
             }
             //  console.dir(weather);
-            for (let i = 0; i < weather.hourly.data.length; i++) {
-                console.log(weather.hourly.data[i].time);
-            }
+            // for (let i = 0; i < weather.hourly.data.length; i++) {
+            //     console.log(weather.hourly.data[i].time);
+            // }
             //
             // let currentTime = (weather.daily.data[0].time);
             // let currentTimeHR = console.log(moment.unix(currentTime).format("hh"));
