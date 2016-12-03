@@ -12,7 +12,6 @@ app
     .post("/api/maps/distance_mat", function(req, res, next) {
         let c = req.body;
         maps_api.distance_matrix(c.origin, c.destination, c.depart_time, function(a) {
-            console.log(JSON.stringify(a));
             res.end(JSON.stringify(a));
         });
     })
