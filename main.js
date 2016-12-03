@@ -4,7 +4,7 @@ let maps_api = require("./scripts/maps.js")();
 let forecast = require("./index.js")();
 let app = express();
 let listener = app.listen(8080, 'localhost', function() {
-    console.log("Server is listening on port 8080")
+    console.log("Server is listening on port 8080");
 });
 
 app
@@ -19,7 +19,7 @@ app
         let c = req.body;
         maps_api.geocode(c.address, function(a){
             res.end(JSON.stringify(a));
-        })
+        });
     })
     .post("/api/weather/", function(req, res, next){
         let c = req.body;
@@ -33,4 +33,3 @@ app
         }
     })
     .use(express.static('static'));
-

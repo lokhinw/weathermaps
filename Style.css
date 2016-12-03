@@ -1,23 +1,33 @@
 .logo {
-  width: 200px;
-  float: right;
-  margin-left: 40px;
-  margin-top: auto;
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-=======
->>>>>>> Stashed changes
-  height: auto;
-
->>>>>>> origin/master
+    width: 200px;
+    float: right;
+    margin-left: 40px;
+    margin-top: auto;
+    height: auto;
 }
 
 .sb-search {
-  margin-top: 40px;
+    margin-top: 40px;
 }
 
-.search {
-  width: 20px;
-  height: 20px;
+.sharp {
+    border-radius: 0 !important;
+}
+
+.btn {
+    color: #0088cc;
+}
+
+.form-control {
+    background-color: #428bca;
+}
+
+#weatherinformation {
+    background: rgba(0, 0, 0, 0.55);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
 }

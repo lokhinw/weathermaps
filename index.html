@@ -4,34 +4,35 @@
 <head>
     <meta charset="utf-8">
     <title>Weather Maps</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-</head>
 
-<body>
-
-
-
-
-
-
-
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script> -->
-</body>
 
     <link rel="shortcut icon" href="imageedit_4_9145829465.png" />
     <link rel="stylesheet" type="text/css" href="Style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script type="text/javascript" src="Script.js"></script>
-  <img src="WeatherMaps.png" alt="Weather Maps logo" class="logo"/>
-  </head>
-  <body>
+    <img src="WeatherMaps.png" alt="Weather Maps logo" class="logo" />
+</head>
+
+<body>
+  <div id="weatherinformation">
+
+
+   </div>
+
+
     <div id="sb-search" class="sb-search">
-      <form class="navbar-form navbar-left" role="search">
-      <div class="form-group">
-          <input type="text" class="form-control" placeholder="Destination">
-      </div>
-      <button type="submit" class="btn btn-default"><img class="search" src="Search Logo.png"/></button>
-  </form>
-  </div>
-  </body>
+        <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+                <input type="text" class="form-control sharp" placeholder="Departure">
+                <input type="text" class="form-control sharp" placeholder="Arrival">
+            </div>
+            <button type="submit" class="btn btn-primary sharp"><span class="glyphicon glyphicon-search"></span></button>
+        </form>
+        <form>
+
+        </form>
+
+    </div>
+</body>
+
 </html>
