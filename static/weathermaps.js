@@ -19,12 +19,19 @@ var directionsDisplay;
 var directionsService;
 var map;
 
+var img = {
+    'rain': "assets/weather-rain.png",
+    'snow': "assets/weather-snow.png",
+    'sleet': "assets/weather-sleet.png",
+    undefined: "assets/weather-noprecip.png"
+};
+
 function init() {
     directionsService = new google.maps.DirectionsService();
     directionsDisplay = new google.maps.DirectionsRenderer();
     var chicago = new google.maps.LatLng(41.850033, -87.6500523);
     var mapOptions = {
-        zoom: 7,
+        zoom: 3,
         center: chicago
     };
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
@@ -67,20 +74,47 @@ function weather(coord, hours, callback) {
 }
 
 function display(err, origin, destination, dist, weather_origin, weather_dest) {
+    $("#everything").fadeIn(1000);
+    $("#celery").fadeOut(1000);
     if (err) {
         alert(err);
     }
     else {
         display_route(origin, destination);
-        var kdscln = $("#weatherinformation");
-        kdscln.text(JSON.stringify({
+
+        $("#information").text(JSON.stringify({
             origin: origin,
             destination: destination,
             dist: dist,
             weather_origin: weather_origin,
             weather_dest: weather_dest
         }));
-        kdscln.fadeIn(1000);
+
+        var clas = ['m_origin_name', 'm_dest_name'];
+        var clasv = [origin.formatted_address, destination.formatted_address];
+        var ids =
+            [
+                'm_distance', 'm_time',
+                'm_origin_temp', 'm_origin_chance', 'm_origin_humid',
+                'm_dest_temp', 'm_dest_chance', 'm_dest_humid'
+            ];
+        var idsv =
+            [
+                dist.distance.text, dist.duration.text,
+                Math.round(weather_origin.temperature), Math.round(weather_origin.precipProbability * 100), Math.round(weather_origin.humidity * 100),
+                Math.round(weather_dest.temperature), Math.round(weather_dest.precipProbability * 100), Math.round(weather_dest.humidity * 100)
+            ];
+
+        for (var i = 0; i < clas.length; i++) {
+            $("." + clas[i]).text(clasv[i]);
+        }
+        for (var i = 0; i < ids.length; i++) {
+            $("#" + ids[i]).text(idsv[i]);
+        }
+        $("#m_img_origin").attr("src", img[weather_origin.precipType]);
+        $("#m_img_dest").attr("src", img[weather_dest.precipType]);
+
+        $("#winfo").modal('show');
     }
 }
 
@@ -130,11 +164,13 @@ function query(origin, destination) {
     });
 }
 $(function () {
-    $("#weatherinformation").fadeOut(1);
+    $("#winfo").modal('hide');
+    $("#celery").fadeOut(0);
     $("#form").submit(function (event) {
         var depn = $("#txt_depart").val();
         var desn = $("#txt_arrive").val();
-        console.log(depn + " " + desn);
+        $("#everything").fadeOut(1000);
+        $("#celery").fadeIn(1000);
         query(depn, desn);
         event.preventDefault();
     })

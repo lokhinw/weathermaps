@@ -42,7 +42,7 @@ module.exports = function() {
                   precipProbability: weather.hourly.data[hrsFromNow].precipProbability,
                   humidity: weather.hourly.data[hrsFromNow].humidity
                 });
-            } else if (hrsFromNow < 24*7) {
+            } else if (Math.floor(hrsFromNow / 24) < 7) {
               callback( null,{
                 temperature: weather.daily.data[Math.floor(hrsFromNow/24)].temperature,
                 precipType: weather.daily.data[Math.floor(hrsFromNow/24)].precipType,
