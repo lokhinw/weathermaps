@@ -75,11 +75,12 @@ function weather(coord, hours, callback) {
 
 function display(err, origin, destination, dist, weather_origin, weather_dest) {
     $("#everything").fadeIn(1000);
-    $("#celery").fadeOut(1000);
-    if (err) {
-        alert(err);
-    }
-    else {
+    $("#celery").fadeOut(1000, function(){
+        if (err) {
+            $("<div class=\"alert alert-danger alert-dismissible\"> <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><strong>Hey!</strong> " + err + "</div>").hide().appendTo("#abox").fadeIn(500);
+        }
+    });
+    if(!err) {
         display_route(origin, destination);
 
         $("#information").text(JSON.stringify({
@@ -135,15 +136,19 @@ function query(origin, destination) {
         var dist = res[2];
 
         if (!geo_origin) {
-            err = "Origin does not exist";
+            err = "Your departure location does not exist!";
             display(err);
         }
         else if (!geo_dest) {
-            err = "Destination does not exist";
+            err = "Your destination does not exist!";
             display(err);
         }
         else if (dist.status == "ZERO_RESULTS" || dist.status == "NOT_FOUND") {
-            err = "Path could not be found";
+            err = "I could not find a path between those places.";
+            display(err);
+        }
+        else if(dist.duration.value / (60 * 60) >= 24 * 8){
+            err = "Your trip is too long!";
             display(err);
         }
         else {

@@ -35,3 +35,12 @@
     height: 100%;
     z-index: -999;
 }
+
+#abox {
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    z-index: 9999;
+}
