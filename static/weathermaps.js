@@ -96,13 +96,13 @@ function display(err, origin, destination, dist, weather_origin, weather_dest) {
         var clasv = [origin.formatted_address, destination.formatted_address];
         var ids =
             [
-                'm_distance', 'm_time',
+                'm_distance', 'm_time', 'm_fuel',
                 'm_origin_temp', 'm_origin_chance', 'm_origin_humid',
                 'm_dest_temp', 'm_dest_chance', 'm_dest_humid'
             ];
         var idsv =
             [
-                dist.distance.text, dist.duration.text,
+                dist.distance.text, dist.duration.text, Math.round(dist.distance.value * 0.000089),
                 Math.round(weather_origin.temperature), Math.round(weather_origin.precipProbability * 100), Math.round(weather_origin.humidity * 100),
                 Math.round(weather_dest.temperature), Math.round(weather_dest.precipProbability * 100), Math.round(weather_dest.humidity * 100)
             ];
