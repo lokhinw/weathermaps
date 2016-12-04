@@ -5,7 +5,7 @@ let forecast = require("./scripts/weather.js")();
 let async = require("async");
 
 let app = express();
-let listener = app.listen(8080, 'localhost', function () {
+let listener = app.listen(80, 'localhost', function () {
     console.log("Server is listening on port 8080");
 });
 
